@@ -22,7 +22,7 @@ export const getUserBlogs = async (req: Request, res: Response) => {
 
 export const updateUserInfo = async (req: Request, res: Response) => {
   const { id } = req.user;
-  const { firstName, lastName, username, email } = req.body;
+  const { firstName, lastName, username, email, profileImageUrl } = req.body;
 
   try {
     const userDetails: any = {};
@@ -41,6 +41,9 @@ export const updateUserInfo = async (req: Request, res: Response) => {
 
     if (email && email !== "") {
       userDetails.email = email;
+    }
+    if (profileImageUrl && profileImageUrl !== "") {
+      userDetails.profileImageUrl = profileImageUrl
     }
 
     const updatedUserInfo = await client.user.update({

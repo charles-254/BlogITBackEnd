@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
 app.use(
   cors({
-    origin: ["https://blog-it-beryl.vercel.app"],
+    origin: ["https://blog-it-beryl.vercel.app","http://localhost:5173"],
     methods: ["POST", "GET", "PATCH", "DELETE"],
     credentials: true,
   }),
