@@ -43,7 +43,7 @@ export const updateUserInfo = async (req: Request, res: Response) => {
       userDetails.email = email;
     }
     if (profileImageUrl && profileImageUrl !== "") {
-      userDetails.profileImageUrl = profileImageUrl
+      userDetails.profileImageUrl = profileImageUrl;
     }
 
     const updatedUserInfo = await client.user.update({
@@ -110,4 +110,3 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
-

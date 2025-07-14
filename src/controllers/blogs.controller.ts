@@ -135,3 +135,39 @@ export const createBlog = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong." });
   }
 };
+
+export const getUserSpecificBlogs = async (req: Request, res: Response) => {
+  const { username } = req.params;
+
+  try {
+    const user = await client.user.findFirst({
+      where: { username },
+    });
+    if (!user) {
+      res.status(404).json({ message: `User ${username} not found.` });
+      return;
+    }
+
+    const userBlogs = await client.blog.findMany({
+      where: {
+        AND: [{ userId: user.id }, { isDeleted: false }],
+      },
+      include: {
+        user: {
+          select: {
+            username: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+            profileImageUrl: true,
+            createdAt: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json({ userBlogs });
+  } catch (_e) {
+    res.status(500).json({ message: "Something went wrong." });
+  }
+};
