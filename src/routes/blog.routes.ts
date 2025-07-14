@@ -14,8 +14,8 @@ const blogRouter = Router();
 
 blogRouter.post("/", verifyUser, verifyBlogFormDetails, createBlog);
 blogRouter.get("/", getAllBlogs);
-blogRouter.get("/:blogId", verifyUser, getSpecificBlog);
-blogRouter.get("/user/:username", verifyUser, getUserSpecificBlogs);
+blogRouter.get("/:blogId",  getSpecificBlog);
+blogRouter.get("/user/:username",  getUserSpecificBlogs);
 blogRouter.patch("/:blogId", verifyUser, updateBlog);
 blogRouter.delete("/:blogId", verifyUser, deleteBlog);
 export default blogRouter;
